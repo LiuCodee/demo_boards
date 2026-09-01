@@ -2,7 +2,7 @@
   "mcpServers": {
     "esp-pilot": {
       "type": "http",
-      "url": "https://mcp.esp-pilot.espressif.tools/mcp"
+      "url": "https://mcp.esp-pilot.espressif.com/mcp"
     }
   }
 }

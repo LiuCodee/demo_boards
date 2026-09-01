@@ -15,10 +15,18 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 IDF_VERSIONS = ["v5.5.4", "latest"]
+IDF_COMPONENT_MANAGER_SPECS = {
+    # idf-component-manager 2.4.8 in the v5.5.4 image mishandles BMGR's
+    # Kconfig-based dependency conditions. Keep the workaround in the IDF 5.x
+    # series; ESP-IDF latest provides its own compatible Component Manager.
+    "v5.5.4": "idf-component-manager>=2.5.0,<3.0.0",
+    "latest": "",
+}
 BMGR_DEP_KEYS = (
     "espressif/esp_board_manager",
     "esp_board_manager",
 )
+MAX_BOARD_DIRECTORY_DEPTH = 3
 REGISTRY_VERSIONS_URL = (
     "https://components.espressif.com/api/v1/components/espressif/esp_board_manager/versions"
 )
@@ -101,8 +109,12 @@ def _latest_registry_version() -> str | None:
 
 def _discover_boards() -> list[dict[str, str]]:
     boards = []
-    for info_path in sorted(REPO_ROOT.glob("*/board_info.yaml")):
-        if info_path.parent.name.startswith("."):
+    for info_path in sorted(REPO_ROOT.rglob("board_info.yaml")):
+        board_dir = info_path.parent.relative_to(REPO_ROOT)
+        if (
+            len(board_dir.parts) > MAX_BOARD_DIRECTORY_DEPTH
+            or any(part.startswith(".") for part in board_dir.parts)
+        ):
             continue
         with info_path.open(encoding="utf-8") as fh:
             info = yaml.safe_load(fh) or {}
@@ -147,6 +159,7 @@ def main() -> int:
                         "target": board["target"],
                         "idf": idf,
                         "bmgr": bmgr,
+                        "component_manager": IDF_COMPONENT_MANAGER_SPECS[idf],
                     }
                 )
     matrix = {"include": include}
