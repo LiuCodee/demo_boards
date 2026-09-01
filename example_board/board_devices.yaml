@@ -1,0 +1,9 @@
+devices:
+  - name: power_control
+    type: gpio_ctrl
+    version: default
+    config:
+      active_level: 1
+      default_level: 0
+    peripherals:
+      - name: gpio_power
