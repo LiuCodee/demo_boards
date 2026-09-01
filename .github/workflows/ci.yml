@@ -34,10 +34,24 @@ jobs:
           target: ${{ matrix.target }}
           path: ci/test_app
           command: |
-            pip install -q esp-bmgr-assist
+            if [ -n "${{ matrix.component_manager }}" ]; then
+              python -m pip install -q --upgrade "${{ matrix.component_manager }}"
+            fi
+            python -m pip install -q --upgrade esp-bmgr-assist
+            python -m pip show esp-bmgr-assist esp-bmgr-py idf-component-manager || true
             python ../scripts/pin_bmgr_version.py "${{ matrix.bmgr }}"
-            idf.py bmgr -b "${{ matrix.board }}"
-            idf.py build
+            idf.py bmgr -l
+            if python ../scripts/check_bmgr_catalog.py --chip "${{ matrix.target }}"; then
+              idf.py bmgr -b "${{ matrix.board }}"
+              idf.py build
+            else
+              status=$?
+              if [ "${status}" -eq 10 ]; then
+                echo "::notice title=Unsupported board/IDF combination::${{ matrix.board }} (${{ matrix.target }}) is not supported by Board Manager ${{ matrix.bmgr }} with this ESP-IDF version."
+                exit 0
+              fi
+              exit "${status}"
+            fi
 
   upload:
     needs: test

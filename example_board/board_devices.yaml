@@ -6,4 +6,4 @@ devices:
       active_level: 1
       default_level: 0
     peripherals:
-      - name: gpio_power
+      - gpio_name: gpio_power

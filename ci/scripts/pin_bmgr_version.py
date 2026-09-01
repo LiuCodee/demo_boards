@@ -15,7 +15,7 @@ def main() -> int:
         print("usage: pin_bmgr_version.py <version-or-star>", file=sys.stderr)
         return 2
     requested = sys.argv[1].strip()
-    version = "*" if requested == "*" else f"=={requested}"
+    version = '"*"' if requested == "*" else f'"=={requested}"'
     text = MANIFEST.read_text(encoding="utf-8")
     updated, count = re.subn(
         r"(espressif/esp_board_manager:[\s\S]*?version:\s*)([^\n]+)",

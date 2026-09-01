@@ -1,39 +1,52 @@
-# ESP Board Manager 厂家板组件模板
+# YOUR_VENDOR_NAME ESP Board Manager Board Pack
 
 [中文](README_CN.md)
 
-This repository is an ESP Board Manager **board pack**: YAML board definitions that applications can download from the [ESP Component Registry](https://components.espressif.com).
+This component provides ESP Board Manager YAML definitions for YOUR_VENDOR_NAME
+development boards. Applications can install it from the
+[ESP Component Registry](https://components.espressif.com) and select a board.
 
-## Use in an application
+> Template note: Replace `YOUR_VENDOR_NAME` and update the following table with
+> the supported boards before publishing.
 
-1. Install the helper once in your ESP-IDF Python environment:
+## Supported Boards
 
-   ```bash
-   pip install esp-bmgr-assist
-   ```
+Run `python scripts/update_supported_boards_table.py` to update the board and
+chip columns. Maintainers fill in the device capability columns.
 
-2. Add this board pack to the project (replace the namespace and name with your GitHub user name and this repository name):
+<!-- BEGIN SUPPORTED_BOARDS -->
+| Board | Chip | Audio | SD Card | LCD | LCD Touch | Camera | Buttons | LED Strip | Knob |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `example_board` | ESP32-S3 | | | | | | | | |
+<!-- END SUPPORTED_BOARDS -->
 
-   ```bash
-   idf.py add-dependency "YOUR_GITHUB_USERNAME/YOUR_REPO_NAME"
-   ```
+## Use This Pack in an Application
 
-   The pack already depends on `espressif/esp_board_manager` (`>=0.7.0`). You do not need to add Board Manager again unless you want a tighter pin.
+Install the helper once in the active ESP-IDF Python environment:
 
-3. List and select a board:
+```bash
+python -m pip install --upgrade esp-bmgr-assist
+```
 
-   ```bash
-   idf.py bmgr -l
-   idf.py bmgr -b <board_name>
-   idf.py build
-   ```
+Add the released component, then select a board:
 
-## Supported boards
+```bash
+idf.py add-dependency "YOUR_NAMESPACE/YOUR_COMPONENT_NAME"
+idf.py bmgr -l
+idf.py bmgr -b <board_name>
+idf.py build
+```
 
-| Board | Chip | Notes |
-|---|---|---|
-| `example_board` | ESP32-S3 | Placeholder. Replace it with a real board before publishing. |
+The board pack already declares `espressif/esp_board_manager`; applications do
+not need to add it again unless they need a tighter version constraint.
 
-## Create or publish this pack
+## Vendor Maintenance Guide
 
-Vendors starting from this GitHub template should follow [GETTING_STARTED.md](GETTING_STARTED.md).
+For creating a repository from this template, migrating an existing BSP,
+configuring CI, and publishing the component, see
+[VENDOR_GUIDE.md](VENDOR_GUIDE.md).
+
+## License
+
+This component uses Apache-2.0. Preserve and comply with existing copyright
+notices and licenses when migrating a BSP or adding third-party content.
