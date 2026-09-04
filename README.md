@@ -1,12 +1,12 @@
-# YOUR_VENDOR_NAME ESP Board Manager Board Pack
+# My_boards ESP Board Manager Board Pack
 
 [中文](README_CN.md)
 
-This component provides ESP Board Manager YAML definitions for YOUR_VENDOR_NAME
+This component provides ESP Board Manager YAML definitions for My_boards
 development boards. Applications can install it from the
 [ESP Component Registry](https://components.espressif.com) and select a board.
 
-> Template note: Replace `YOUR_VENDOR_NAME` and update the following table with
+> Template note: Replace `My_boards` and update the following table with
 > the supported boards before publishing.
 
 ## Supported Boards
@@ -18,6 +18,8 @@ chip columns. Maintainers fill in the device capability columns.
 | Board | Chip | Audio | SD Card | LCD | LCD Touch | Camera | Buttons | LED Strip | Knob |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `example_board` | ESP32-S3 | | | | | | | | |
+| `example_board2` | ESP32-S31 | | | | | | | | |
+| `example_board1` | ESP32 | | | | | | | | |
 <!-- END SUPPORTED_BOARDS -->
 
 ## Use This Pack in an Application
@@ -31,7 +33,7 @@ python -m pip install --upgrade esp-bmgr-assist
 Add the released component, then select a board:
 
 ```bash
-idf.py add-dependency "YOUR_NAMESPACE/YOUR_COMPONENT_NAME"
+idf.py add-dependency "LiuCodee/demo_boards"
 idf.py bmgr -l
 idf.py bmgr -b <board_name>
 idf.py build

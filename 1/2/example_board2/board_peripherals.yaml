@@ -1,0 +1,8 @@
+peripherals:
+  - name: gpio_power
+    type: gpio
+    role: io
+    config:
+      pin: 4
+      mode: GPIO_MODE_OUTPUT
+      default_level: 0

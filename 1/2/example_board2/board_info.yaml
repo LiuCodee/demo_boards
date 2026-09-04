@@ -1,0 +1,5 @@
+board: example_board2
+chip: esp32s31
+version: "1.0.0"
+description: "Placeholder board. Replace this directory with a real board."
+manufacturer: "CHANGE_ME"

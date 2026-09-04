@@ -1,5 +1,5 @@
 version: "0.7.0"
-description: Board definitions for ESP Board Manager
+description: "ESP Board Manager board definitions for My_boards development boards"
 license: Apache-2.0
 
 tags:

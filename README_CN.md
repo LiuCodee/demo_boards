@@ -1,10 +1,10 @@
-# YOUR_VENDOR_NAME ESP Board Manager 板组件
+# My_boards ESP Board Manager 板组件
 
 [English](README.md)
 
-本组件提供 YOUR_VENDOR_NAME 开发板的 ESP Board Manager YAML 定义，可从 [ESP 组件注册库](https://components.espressif.com) 下载并在应用工程中选择。
+本组件提供 My_boards 开发板的 ESP Board Manager YAML 定义，可从 [ESP 组件注册库](https://components.espressif.com) 下载并在应用工程中选择。
 
-> 模板提示：发布前替换 `YOUR_VENDOR_NAME`，并将下表更新为实际支持的开发板。
+> 模板提示：发布前替换 `My_boards`，并将下表更新为实际支持的开发板。
 
 ## 支持的开发板
 
@@ -14,6 +14,8 @@
 | 开发板名称 | 芯片 | 音频 | SD 卡 | LCD | LCD 触摸 | 摄像头 | 按键 | LED 灯带 | 旋钮 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `example_board` | ESP32-S3 | | | | | | | | |
+| `example_board2` | ESP32-S31 | | | | | | | | |
+| `example_board1` | ESP32 | | | | | | | | |
 <!-- END SUPPORTED_BOARDS -->
 
 ## 在应用工程中使用本组件
@@ -27,7 +29,7 @@ python -m pip install --upgrade esp-bmgr-assist
 添加已发布的组件后，选择开发板：
 
 ```bash
-idf.py add-dependency "YOUR_NAMESPACE/YOUR_COMPONENT_NAME"
+idf.py add-dependency "LiuCodee/demo_boards"
 idf.py bmgr -l
 idf.py bmgr -b <board_name>
 idf.py build
