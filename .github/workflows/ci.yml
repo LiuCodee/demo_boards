@@ -69,7 +69,7 @@ jobs:
           fi
           python3 -m pip install -q idf-component-manager
           compote component upload \
-            --namespace "${{ github.repository_owner }}" \
+            --namespace "LiuCodee" \
             --name "${{ github.event.repository.name }}" \
             --allow-existing \
             --dry-run
